@@ -524,44 +524,48 @@ export function App() {
 
   return (
     <div className="event-shell">
-      <header className="event-header">
-        <div>
-          <p className="brand-eyebrow">Startup Kumbh 2026 | E-Cell NIT Agartala</p>
-          <h1>The Biggest Startup Event Of Tripura</h1>
-          <p className="brand-copy">
-            Registration, verification, live polling, food coupons and hostel operations from one
-            unified portal.
-          </p>
-        </div>
-        <div className="header-quick-meta">
-          <span className="meta-pill">14th & 15th March 2026</span>
-          <span className={`meta-pill ${isConnected ? 'ok' : 'warn'}`}>
-            Poll Socket: {isConnected ? 'Live' : 'Offline'}
-          </span>
-        </div>
-      </header>
+      {screen !== 'landing' && (
+        <header className="event-header">
+          <div>
+            <p className="brand-eyebrow">Startup Kumbh 2026 | E-Cell NIT Agartala</p>
+            <h1>The Biggest Startup Event Of Tripura</h1>
+            <p className="brand-copy">
+              Registration, verification, live polling, food coupons and hostel operations from one
+              unified portal.
+            </p>
+          </div>
+          <div className="header-quick-meta">
+            <span className="meta-pill">14th & 15th March 2026</span>
+            <span className={`meta-pill ${isConnected ? 'ok' : 'warn'}`}>
+              Poll Socket: {isConnected ? 'Live' : 'Offline'}
+            </span>
+          </div>
+        </header>
+      )}
 
-      <section className="top-actions">
-        {user ? (
-          <>
-            <button className="secondary" onClick={() => navigate('dashboard')} type="button">
-              Dashboard
-            </button>
-            <button className="secondary" onClick={logout} type="button">
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <button className="secondary" onClick={() => navigate('landing')} type="button">
-              Home
-            </button>
-            <button className="secondary" onClick={() => navigate('login')} type="button">
-              Login
-            </button>
-          </>
-        )}
-      </section>
+      {screen !== 'landing' && (
+        <section className="top-actions">
+          {user ? (
+            <>
+              <button className="secondary" onClick={() => navigate('dashboard')} type="button">
+                Dashboard
+              </button>
+              <button className="secondary" onClick={logout} type="button">
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="secondary" onClick={() => navigate('landing')} type="button">
+                Home
+              </button>
+              <button className="secondary" onClick={() => navigate('login')} type="button">
+                Login
+              </button>
+            </>
+          )}
+        </section>
+      )}
 
       {uiError ? <p className="flash error">{uiError}</p> : null}
       {uiInfo ? <p className="flash info">{uiInfo}</p> : null}
@@ -569,56 +573,98 @@ export function App() {
 
       {screen === 'landing' && (
         <main className="screen-grid landing-grid">
-          <article className="panel landing-hero">
-            <div className="landing-kicker">
-              <span>Startup Kumbh 2026</span>
-              <span>NIT Agartala</span>
-            </div>
+          <article className="panel landing-poster premium-poster">
+            <div className="poster-title-wrap">
+              <div className="poster-topline">
+                <div className="logo-placeholder">
+                  <img src="/E-CELL%20LOGO.jpg" alt="E-Cell NIT Agartala" className="ecell-logo-img" />
+                </div>
+                <div className="logo-placeholder itbi-logo">
+                  <span className="bulb"></span>
+                  <div className="itbi-text">
+                    <strong>Startup Incubator</strong>
+                    <strong>DST i-TBI</strong>
+                    <small>NITA Foundation for Innovation,<br/>Incubation and Entrepreneurship</small>
+                  </div>
+                </div>
+              </div>
 
-            <h2>
-              Build.
-              <br />
-              Pitch.
-              <br />
-              Scale.
-            </h2>
+              <img 
+                src="https://startupkumb.b-cdn.net/WhatsApp%20Image%202026-03-11%20at%2012.57.28.jpeg" 
+                alt="Startup Kumbh Logo" 
+                className="startup-kumbh-logo-img" 
+              />
+              
+              <div className="support-section">
+                <p className="poster-support">Supported By</p>
+                <div className="support-grid">
+                  <div className="support-logo dst-nidhi">
+                    <span className="nidhi-icon"></span>
+                    <strong>DST NIDHI</strong>
+                  </div>
+                  <div className="support-logo dst-gov">
+                    <span className="emblem-icon"></span>
+                    <div>
+                      <small>विज्ञान एवं प्रौद्योगिकी विभाग</small>
+                      <strong>DEPARTMENT OF</strong>
+                      <strong>SCIENCE & TECHNOLOGY</strong>
+                    </div>
+                  </div>
+                  <div className="support-logo nit-agartala">
+                    <span className="nita-icon"></span>
+                  </div>
+                </div>
+              </div>
 
-            <p className="landing-subtitle">
-              Join Tripura&apos;s flagship startup stage with incubation support, live pitching and
-              direct networking with founders, experts and ecosystem leaders.
-            </p>
+              <div className="poster-main-text">
+                <p className="poster-tagline">
+                  <span className="text-blue">THE BIGGEST</span> <span className="text-orange">STARTUP</span> <span className="text-blue">EVENT OF</span> <span className="text-orange">TRIPURA</span>
+                </p>
+                
+                <div className="poster-date-box">
+                  <h3>14<sup>th</sup> & 15<sup>th</sup> March 2026</h3>
+                  <p>National Institute Of Technology, Agartala</p>
+                </div>
+              </div>
 
-            <div className="landing-event-strip">
-              <p>14th & 15th March 2026</p>
-              <p>National Institute of Technology, Agartala</p>
-              <strong>Funding Opportunities up to 10 Lakhs Per Startup</strong>
-            </div>
+              <div className="poster-funding-pill">
+                <div className="funding-text-left">
+                  <span>Funding</span>
+                  <span>Opportunities upto</span>
+                </div>
+                <strong className="funding-amount">10 Lakhs</strong>
+                <div className="funding-text-right">
+                  <span>Per</span>
+                  <span>Startup</span>
+                </div>
+              </div>
 
-            <div className="cta-row">
-              <button onClick={() => navigate('register-role')} type="button">
-                Register Now
-              </button>
-              <button className="secondary" onClick={() => navigate('login')} type="button">
-                Login Portal
-              </button>
+              <div className="cta-row poster-actions">
+                <button onClick={() => navigate('register-role')} type="button" className="btn-primary-glow">
+                  Register Now
+                </button>
+                <button className="secondary btn-glass" onClick={() => navigate('login')} type="button">
+                  Login Portal
+                </button>
+              </div>
             </div>
           </article>
 
-          <article className="panel landing-audience">
-            <h3>Who Should Join</h3>
-            <div className="audience-tags">
-              <span>Participants</span>
-              <span>Special Guests</span>
-              <span>Startups</span>
+          <article className="panel landing-audience poster-side-panel">
+            <h3>Who Should Join?</h3>
+            <div className="audience-tags poster-audience-tags">
+              <span>Participant</span>
+              <span>Special Guest</span>
+              <span>Startup</span>
             </div>
             <p>
-              From student founders and early-stage teams to mentors and startup leaders, this
-              portal gives you one smooth event experience.
+              Startup Kumbh is designed for founders, campus innovators, mentors and ecosystem
+              enablers. Register once and access complete event services from your portal.
             </p>
           </article>
 
           <article className="panel stats landing-stats">
-            <h3>Live Registration Snapshot</h3>
+            <h3>Live Event Snapshot</h3>
             <div className="stats-grid">
               <div>
                 <span>Participants</span>
@@ -641,7 +687,7 @@ export function App() {
 
           <article className="panel landing-timeline">
             <div className="landing-timeline-head">
-              <h3>Event Timeline Preview</h3>
+              <h3>Timeline Highlights</h3>
               <button className="secondary" onClick={() => navigate('timeline')} type="button">
                 View Full Timeline
               </button>

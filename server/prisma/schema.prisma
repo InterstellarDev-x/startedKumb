@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  PARTICIPANT
+  SPECIAL_GUEST
+  STARTUP
+  ADMIN
+  DISPLAY
+}
+
+model User {
+  id             String          @id @default(uuid())
+  email          String          @unique
+  passwordHash   String          @map("password_hash")
+  firstName      String          @map("first_name")
+  lastName       String          @map("last_name")
+  role           Role            @default(PARTICIPANT)
+  verified       Boolean         @default(false)
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+  sessions       Session[]
+  pollVotes      PollVote[]
+  roomAllotment  RoomAllotment?
+  foodCoupon     FoodCoupon?
+  createdPolls   PollQuestion[]  @relation("CreatedPolls")
+  assignedRooms  RoomAllotment[] @relation("AssignedRooms")
+
+  @@map("users")
+}
+
+model Session {
+  token     String   @id
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model TimelineItem {
+  id          Int      @id @default(autoincrement())
+  dayLabel    String   @map("day_label")
+  eventDate   String   @map("event_date")
+  startTime   String   @map("start_time")
+  endTime     String   @map("end_time")
+  title       String
+  venue       String
+  speaker     String?
+  description String
+  sortOrder   Int      @default(0) @map("sort_order")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([eventDate, sortOrder])
+  @@map("timeline_items")
+}
+
+model Room {
+  id          Int            @id @default(autoincrement())
+  hostel      String
+  roomNumber  String         @map("room_number")
+  capacity    Int
+  createdAt   DateTime       @default(now()) @map("created_at")
+  allotments  RoomAllotment[]
+
+  @@unique([hostel, roomNumber])
+  @@map("rooms")
+}
+
+model RoomAllotment {
+  id           Int      @id @default(autoincrement())
+  userId       String   @unique @map("user_id")
+  roomId       Int      @map("room_id")
+  assignedById String?  @map("assigned_by_id")
+  assignedAt   DateTime @default(now()) @map("assigned_at")
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  room         Room     @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  assignedBy   User?    @relation("AssignedRooms", fields: [assignedById], references: [id])
+
+  @@index([roomId])
+  @@map("room_allotments")
+}
+
+model FoodCoupon {
+  id          Int      @id @default(autoincrement())
+  userId      String   @unique @map("user_id")
+  code        String   @unique
+  generatedAt DateTime @default(now()) @map("generated_at")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("food_coupons")
+}
+
+model PollQuestion {
+  id          String      @id @default(uuid())
+  text        String
+  createdAt   DateTime    @default(now()) @map("created_at")
+  createdById String?     @map("created_by_id")
+  createdBy   User?       @relation("CreatedPolls", fields: [createdById], references: [id])
+  options     PollOption[]
+  votes       PollVote[]
+
+  @@map("poll_questions")
+}
+
+model PollOption {
+  id         Int          @id @default(autoincrement())
+  questionId String       @map("question_id")
+  optionText String       @map("option_text")
+  votes      Int          @default(0)
+  question   PollQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  pollVotes  PollVote[]
+
+  @@index([questionId])
+  @@map("poll_options")
+}
+
+model PollVote {
+  id         Int          @id @default(autoincrement())
+  questionId String       @map("question_id")
+  optionId   Int          @map("option_id")
+  userId     String       @map("user_id")
+  createdAt  DateTime     @default(now()) @map("created_at")
+  question   PollQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  option     PollOption   @relation(fields: [optionId], references: [id], onDelete: Cascade)
+  user       User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, userId])
+  @@index([userId])
+  @@map("poll_votes")
+}

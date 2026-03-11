@@ -1,0 +1,44 @@
+:root {
+  --ink: #0d2f82;
+  --ink-soft: #38518e;
+  --line: #cbd6ee;
+  --panel: #f8fbff;
+  --mint: #1ea37d;
+  --sky: #1245a8;
+  --orange: #ff7a00;
+
+  font-family: 'Manrope', 'Avenir Next', 'Segoe UI', sans-serif;
+  line-height: 1.45;
+  font-weight: 500;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 90% 8%, rgba(255, 122, 0, 0.17), transparent 30%),
+    radial-gradient(circle at 4% 0%, rgba(18, 69, 168, 0.2), transparent 26%),
+    repeating-linear-gradient(
+      160deg,
+      rgba(13, 47, 130, 0.03) 0px,
+      rgba(13, 47, 130, 0.03) 3px,
+      transparent 3px,
+      transparent 14px
+    ),
+    linear-gradient(180deg, #ffffff 0%, #f6f8fc 100%);
+  padding: clamp(0.9rem, 2vw, 1.6rem);
+}

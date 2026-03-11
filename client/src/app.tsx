@@ -589,63 +589,67 @@ export function App() {
                 </div>
               </div>
 
-              <img 
-                src="https://startupkumb.b-cdn.net/WhatsApp%20Image%202026-03-11%20at%2012.57.28.jpeg" 
-                alt="Startup Kumbh Logo" 
-                className="startup-kumbh-logo-img" 
-              />
-              
-              <div className="support-section">
-                <p className="poster-support">Supported By</p>
-                <div className="support-grid">
-                  <div className="support-logo dst-nidhi">
-                    <span className="nidhi-icon"></span>
-                    <strong>DST NIDHI</strong>
-                  </div>
-                  <div className="support-logo dst-gov">
-                    <span className="emblem-icon"></span>
-                    <div>
-                      <small>विज्ञान एवं प्रौद्योगिकी विभाग</small>
-                      <strong>DEPARTMENT OF</strong>
-                      <strong>SCIENCE & TECHNOLOGY</strong>
+              <div className="poster-image-frame">
+                <img 
+                  src="https://startupkumb.b-cdn.net/WhatsApp%20Image%202026-03-11%20at%2012.57.28.jpeg" 
+                  alt="Startup Kumbh Logo" 
+                  className="startup-kumbh-logo-img" 
+                />
+
+                <div className="poster-overlay-content">
+                  <div className="support-section">
+                    <p className="poster-support">Supported By</p>
+                    <div className="support-grid">
+                      <div className="support-logo dst-nidhi">
+                        <span className="nidhi-icon"></span>
+                        <strong>DST NIDHI</strong>
+                      </div>
+                      <div className="support-logo dst-gov">
+                        <span className="emblem-icon"></span>
+                        <div>
+                          <small>विज्ञान एवं प्रौद्योगिकी विभाग</small>
+                          <strong>DEPARTMENT OF</strong>
+                          <strong>SCIENCE & TECHNOLOGY</strong>
+                        </div>
+                      </div>
+                      <div className="support-logo nit-agartala">
+                        <span className="nita-icon"></span>
+                      </div>
                     </div>
                   </div>
-                  <div className="support-logo nit-agartala">
-                    <span className="nita-icon"></span>
+
+                  <div className="poster-main-text">
+                    <p className="poster-tagline">
+                      <span className="text-blue">THE BIGGEST</span> <span className="text-orange">STARTUP</span> <span className="text-blue">EVENT OF</span> <span className="text-orange">TRIPURA</span>
+                    </p>
+                    
+                    <div className="poster-date-box">
+                      <h3>14<sup>th</sup> & 15<sup>th</sup> March 2026</h3>
+                      <p>National Institute Of Technology, Agartala</p>
+                    </div>
+                  </div>
+
+                  <div className="poster-funding-pill">
+                    <div className="funding-text-left">
+                      <span>Funding</span>
+                      <span>Opportunities upto</span>
+                    </div>
+                    <strong className="funding-amount">10 Lakhs</strong>
+                    <div className="funding-text-right">
+                      <span>Per</span>
+                      <span>Startup</span>
+                    </div>
+                  </div>
+
+                  <div className="cta-row poster-actions">
+                    <button onClick={() => navigate('register-role')} type="button" className="btn-primary-glow">
+                      Register Now
+                    </button>
+                    <button className="secondary btn-glass" onClick={() => navigate('login')} type="button">
+                      Login Portal
+                    </button>
                   </div>
                 </div>
-              </div>
-
-              <div className="poster-main-text">
-                <p className="poster-tagline">
-                  <span className="text-blue">THE BIGGEST</span> <span className="text-orange">STARTUP</span> <span className="text-blue">EVENT OF</span> <span className="text-orange">TRIPURA</span>
-                </p>
-                
-                <div className="poster-date-box">
-                  <h3>14<sup>th</sup> & 15<sup>th</sup> March 2026</h3>
-                  <p>National Institute Of Technology, Agartala</p>
-                </div>
-              </div>
-
-              <div className="poster-funding-pill">
-                <div className="funding-text-left">
-                  <span>Funding</span>
-                  <span>Opportunities upto</span>
-                </div>
-                <strong className="funding-amount">10 Lakhs</strong>
-                <div className="funding-text-right">
-                  <span>Per</span>
-                  <span>Startup</span>
-                </div>
-              </div>
-
-              <div className="cta-row poster-actions">
-                <button onClick={() => navigate('register-role')} type="button" className="btn-primary-glow">
-                  Register Now
-                </button>
-                <button className="secondary btn-glass" onClick={() => navigate('login')} type="button">
-                  Login Portal
-                </button>
               </div>
             </div>
           </article>
